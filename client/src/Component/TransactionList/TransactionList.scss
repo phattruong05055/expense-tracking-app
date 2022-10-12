@@ -1,0 +1,14 @@
+.transactionlist{
+    width: 500px;
+    margin: 30px;
+    max-height: 410px;
+    border: 2px solid black;
+    .transactionlist-item{
+        width: 100%;
+        height: 50px; 
+        text-align: center;
+        th{
+            max-width: 40px;
+        }
+    }
+}

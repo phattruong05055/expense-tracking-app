@@ -1,23 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { BrowserRouter as Browser, Routes, Route } from "react-router-dom";
+import ExpenseContext from "./Contexts/ExpenseContext";
+import Homepage from "./Page/Homepage/Homepage";
+import LoginPage from "./Page/LoginPage/LoginPage";
+import Header from "./Component/Header/Header";
 
+import "./App.css";
 function App() {
+  const [transactions, setTransactions] = useState([]);
+  const [editingTracsaction, setEditingTransaction] = useState(null);
+  const [mode, setMode] = useState("add");
+
+  const onAddTransaction = (transaction) => {
+    const newtransactions = [...transactions, transaction];
+    setTransactions(newtransactions);
+  };
+  const onDeleteTransaction = (id) => {
+    const newTransaction = transactions.filter((item) => item.id !== id);
+    setTransactions(newTransaction);
+  };
+
+  const onEditTransaction = (id) => {
+    // find() => object ma muon edit
+    const transaction = transactions.find((item) => item.id === id);
+
+    // Set state editingTracsaction
+    setEditingTransaction(transaction);
+    setMode("edit");
+  };
+
+  const onUpdateTransactionData = (newData) => {
+    const updatedIdx = transactions.findIndex((tx) => tx.id === newData.id);
+    let updatedTransactions = [...transactions];
+    updatedTransactions[updatedIdx] = newData;
+    setTransactions(updatedTransactions);
+    setMode("add");
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <Browser>
+        <ExpenseContext.Provider
+          value={{
+            onAddTransaction,
+            transactions,
+            onEditTransaction,
+            setTransactions,
+            onDeleteTransaction,
+            editingTracsaction,
+            onUpdateTransactionData,
+            mode,
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          <Header></Header>
+          <Routes>
+            <Route path="/" element={<Homepage />}></Route>
+            <Route path="/LoginPage" element={<LoginPage />}></Route>
+          </Routes>
+        </ExpenseContext.Provider>
+      </Browser>
     </div>
   );
 }
