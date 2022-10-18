@@ -6,24 +6,22 @@ const TransactionList = (props) => {
   const transactionlist = transactions.map((item, index) => {
     const { amount, type, date, category, id } = item;
     return (
-      <thead key={index} className="transactionlist-item">
-        <tr>
-          <th>{amount}</th>
-          <th>{type}</th>
-          <th>{date}</th>
-          <th>{category}</th>
-          <th>
-            <button onClick={() => onDeleteTransaction(id)}>
-              <i className="fa-sharp fa-solid fa-trash"></i>
-            </button>
-          </th>
-          <th>
-            <button onClick={() => onEditTransaction(id)}>
-              <i className="fas fa-edit"></i>
-            </button>
-          </th>
-        </tr>
-      </thead>
+      <div key={index} className="transactionlist-item">
+        <span>{amount}</span>
+        <span>{type}</span>
+        <span>{date}</span>
+        <span>{category}</span>
+        <span>
+          <button onClick={() => onDeleteTransaction(id)}>
+            <i className="fa-sharp fa-solid fa-trash"></i>
+          </button>
+        </span>
+        <span>
+          <button onClick={() => onEditTransaction(id)}>
+            <i className="fas fa-edit"></i>
+          </button>
+        </span>
+      </div>
     );
   });
   return <table className="transactionlist">{transactionlist}</table>;

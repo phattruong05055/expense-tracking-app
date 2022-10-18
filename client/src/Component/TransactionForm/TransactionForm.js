@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { Categories } from "../../service/CategoryList";
 
 const initialState = {
   amount: "",
@@ -72,7 +73,7 @@ const TransactionForm = (props) => {
           value={data.type}
         >
           <option value={1}>INCOME</option>
-          <option value={2}>EXPENSE</option>
+          <option value={1}>EXPENSE</option>
         </select>
         <div className="form-floating mb-3">
           <input

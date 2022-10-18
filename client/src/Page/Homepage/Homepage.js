@@ -4,6 +4,7 @@ import TransactionForm from "../../Component/TransactionForm/TransactionForm";
 import { Link } from "react-router-dom";
 import { useExpenseContext } from "../../Contexts/ExpenseContext";
 import TransactionList from "../../Component/TransactionList/TransactionList";
+import Chart from "../../Component/Chart/Chart";
 
 const Homepage = (props) => {
   const {
@@ -34,6 +35,9 @@ const Homepage = (props) => {
             onDeleteTransaction={onDeleteTransaction}
             onEditTransaction={onEditTransaction}
           ></TransactionList>
+        </div>
+        <div className="col-6">
+          <Chart></Chart>
         </div>
       </div>
     </div>
